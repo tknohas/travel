@@ -1,0 +1,9 @@
+<%= @room.title %>
+
+<%= safe_join(@room.body.split("\n"),tag(:br)) %>
+
+<%= @room.price %>
+
+<%= @room.adress %>
+
+<%= attachment_image_tag @room, :room_image %>

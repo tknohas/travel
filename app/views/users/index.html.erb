@@ -1,0 +1,17 @@
+<h3>アカウント</h3>
+
+<table>
+  <thead> 
+    <th>メールアドレス</th>
+    <th>パスワード</th>
+  </thead>
+  <tbody> 
+    <tr>
+       <td><%= current_user.email %></td>
+       <td>*********</td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to "プロフィール", users_show_path %>
+<%= link_to "編集", edit_user_registration_path %>
