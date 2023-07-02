@@ -1,0 +1,25 @@
+<h1>予約済み一覧</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>画像</th>
+			<th>施設名</th>
+			<th>紹介文</th>
+			<th>料金</th>
+			<th>チェックイン</th>
+            <th>チェックアウト</th>
+            <th>予約確定日時</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @reservation.each do |reservation| %>
+		<tr>
+			<td><%=reservation.room.name%></td>
+			<td><%=reservation.start_day.strftime('%Y年%m月%d日')%></td>
+			<td><%=reservation.end_day.strftime('%Y年%m月%d日')%></td>
+			<td><%=reservation.stay_day*reservation.room.price%></td>
+		</tr>
+	<%end%>
+	</tbody>
+</table>

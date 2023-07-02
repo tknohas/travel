@@ -10,12 +10,15 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     @room.user_id = current_user.id
-    @room.save
+    if @room.save
+      flash[:notice] = "登録が完了しました"
+    end
     redirect_to room_path(@room)
   end
 
   def show
     @room = Room.find(params[:id])
+    @reservation = Reservation.new
   end
 
   def edit
