@@ -8,7 +8,7 @@
 
 <%= attachment_image_tag @room, :room_image %>
 
-<%= form_with model:@reservation, url: reservations_confirm_path do |f| %>
+<%= form_with model:@reservation do |f| %>
 	<%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.hidden_field :room_id, value: @room.id %>
   
