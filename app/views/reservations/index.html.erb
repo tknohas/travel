@@ -3,23 +3,25 @@
 <table>
 	<thead>
 		<tr>
-			<th>画像</th>
 			<th>施設名</th>
 			<th>紹介文</th>
-			<th>料金</th>
 			<th>チェックイン</th>
-            <th>チェックアウト</th>
-            <th>予約確定日時</th>
+      <th>チェックアウト</th>
+      <th>予約確定日時</th>
 		</tr>
 	</thead>
 	<tbody>
-	<% @reservation.each do |reservation| %>
-		<tr>
-			<td><%=reservation.room.name%></td>
-			<td><%=reservation.start_day.strftime('%Y年%m月%d日')%></td>
-			<td><%=reservation.end_day.strftime('%Y年%m月%d日')%></td>
-			<td><%=reservation.stay_day*reservation.room.price%></td>
-		</tr>
-	<%end%>
+	<% @reservations.each do |reservation| %> 
+		<% @rooms = Room.where(id: reservation.room_id) %>
+			<% @rooms.each do |room| %>
+				<tr>
+					<td><%= reservation.room.title %></td>
+					<td><%= reservation.room.body %></td>
+					<td><%= reservation.check_in %></td>
+					<td><%= reservation.check_out %></td>
+					<td><%= reservation.created_at.to_s(:datetime_jp) %></td>
+				</tr>
+		<% end %>
+	<% end %>
 	</tbody>
 </table>

@@ -8,7 +8,7 @@
     <%= @room.title %>
   </div>
 </div>
-<%= form_with model:@reservation do |f| %>
+<%= form_with model:@reservation, url:reservations_confirm_path do |f| %>
   <h3>¥<%=@room.price%>/ 日</h3>
   <h4>開始日</h4>
     <%= f.date_field :check_in, value: :check_in %>
@@ -17,6 +17,6 @@
   <h4>人数</h4>
     <%=f.number_field :people_number, value: :people_number%>
     <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.hidden_field :room_id, value: @room.id %>
+    <%= f.hidden_field  :room_id %>
   <%= f.submit "登録"%>
 <%end%>

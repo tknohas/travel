@@ -1,20 +1,23 @@
 class ReservationsController < ApplicationController
   def index
-    @reservations = Reservation.all
-    @name = current_user.username
+    @reservations = Reservation.where(user_id: current_user.id)
+    #@reservations = Reservation.all.includes(:room)
   end
 
   def confirm
     @reservation = Reservation.new(reservation_params)
-  end
+    @room = Room.find(params[:id])
+   end
 
   def new
-    @room = Room.find_by(params[:room_id])
     @reservation = Reservation.new
+    @room = Room.find(params[:id])
+    #@room = Room.find(params[:room_id])
   end
 
   def create
     @reservation = Reservation.new(reservation_params)
+    @room = Room.find(params[:reservation][:room_id])
     @reservation.user_id = current_user.id
     if @reservation.save
       flash[:notice] = "予約が完了しました"
@@ -24,9 +27,9 @@ class ReservationsController < ApplicationController
 
   def show
     @reservation = Reservation.find_by(params[:reservation_id])
-    end
+  end
   private
   def reservation_params
-    params.require(:reservation).permit(:check_in, :check_out, :days, :people_number, :payment)
+    params.require(:reservation).permit(:check_in, :check_out, :days, :people_number, :payment, :room_id, :user_id)
   end
 end

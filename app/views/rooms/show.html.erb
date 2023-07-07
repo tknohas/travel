@@ -8,8 +8,11 @@
 
 <%= attachment_image_tag @room, :room_image %>
 
-<%= form_with model: @reservation, url: reservations_confirm_path do |f| %>
-	<%= f.label :check_in, "チェックイン" %>
+<%= form_with model:@reservation, url: reservations_confirm_path do |f| %>
+	<%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :room_id, value: @room.id %>
+  
+  <%= f.label :check_in, "チェックイン" %>
 	<%= f.date_field :check_in %>
 
 	<%= f.label :check_out, "チェックアウト" %>
@@ -18,7 +21,7 @@
   <%= f.label :people_number, "人数" %>
 	<%= f.text_field :people_number %>
 
-	<%= f.submit "投稿を完了する" %>
+  <%= f.submit "投稿を完了する" %>
 <% end %>
 
-<%= link_to "予約へ",  new_reservation_path %>
+<%= link_to "予約へ",  {controller: 'reservations', action: 'new', id: @room.id} %>
