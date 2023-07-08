@@ -1,22 +1,22 @@
 <h3>予約確認</h3>
-
+  <table>
+    <tr>
+      <td><%= @reservation.check_in %></td>
+    </tr>
+    <tr>
+      <td><%= @reservation.check_out %></td>
+    </tr>
+    <tr>
+      <td><%= @reservation.people_number %></td>
+    </tr>
+  </table>
 <%= form_with model: @reservation do |f| %>
-    <table>
-      <%= f.hidden_field :user_id, value: current_user.id %>
-      <%= f.hidden_field :room_id, value: @room.id %>
-      <tr>
-        <th><%= f.label :check_in, "チェックイン" %></th>
-        <td><%= f.date_field :check_in %></td>
-      <tr>
-      <tr>
-        <th><%= f.label :check_out, "チェックアウト" %></th>
-        <td><%= f.date_field :check_out %></td>
-      <tr>
-      <tr>
-        <th><%= f.label :people_number, "人数" %></th>
-        <td><%= f.text_field :people_number %></td>
-      <tr>
-    </table>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <%= f.hidden_field :check_in %>
+    <%= f.hidden_field :check_out %>
+    <%= f.hidden_field :people_number %>
+    
   
     <%= f.submit "予約する" %>
   <% end %>

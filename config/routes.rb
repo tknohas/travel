@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :users
   resources :rooms do
     resources :reservations
+    collection do
+      get 'search'
+    end
   end
   resources :reservations
   post 'reservations/confirm'

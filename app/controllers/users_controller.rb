@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     if user_signed_in?
       @users = User.where(username_id: current_user.id).order('created_at DESC')
     end
+    @user = current_user
   end
 
   def show

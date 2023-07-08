@@ -1,15 +1,16 @@
 class RoomsController < ApplicationController
   def index
-    @rooms = current_user.rooms
+    @rooms = Room.all
+    @user = current_user
   end
 
   def new
     @room = Room.new
+    @user = current_user
   end
 
   def create
     @room = Room.new(room_params)
-    @room.user_id = current_user.id
     if @room.save
       flash[:notice] = "登録が完了しました"
     end
@@ -19,10 +20,12 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id])
     @reservation = Reservation.new
+    @user = current_user
   end
 
   def edit
     @room = Room.find(params[:id])
+    @user = current_user
   end
 
   def update
@@ -30,6 +33,12 @@ class RoomsController < ApplicationController
     @room.update(room_params)
     redirect_to rooms_path(@room)
   end
+
+  def search
+        @search = Room.ransack(params[:q])
+        @rooms = @search.result
+        @user = current_user
+      end
 
   private
   def room_params

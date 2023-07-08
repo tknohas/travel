@@ -11,6 +11,30 @@
   </head>
 
   <body>
+    <header>
+      <%= link_to root_path do %>
+        <h2>tm travel</h2>
+      <% end %>
+      <%= attachment_image_tag @user, :profile_image, fallback:"default.icon.png", :size => '100x75' %>
+      <div class="dropdown is-hoverable">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+            <span><%= @user.username %></span>
+            <span class="icon is-small">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <%= link_to '施設の新規登録', new_room_path, class: "dropdown-item" %>
+            <%= link_to '予約済み一覧', reservations_path, class: "dropdown-item" %>
+            <%= link_to '登録済み一覧', rooms_path, class: "dropdown-item" %>
+            <%= link_to 'アカウント設定', users_path, class: "dropdown-item"  %>
+          </div>
+        </div>
+      </div>
+    </header>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
