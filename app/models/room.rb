@@ -5,6 +5,11 @@ class Room < ApplicationRecord
   attachment :room_image
 
   def self.ransackable_attributes(auth_object = nil)
-    ["adress"]
+    ['adress_or_title_or_body']
   end
+
+  validates :title, presence: true
+  validates :body, presence: true
+  validates :price, presence: true
+  validates :adress, presence: true
 end

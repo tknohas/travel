@@ -1,8 +1,59 @@
-<h1>旅行へ行こう！</h1>
-<%= search_form_for @search, url: search_rooms_path do |f| %>
-  <%= f.label :adress_cont, 'エリア名' %>
-  <%= f.search_field :adress_cont %>
-  <br>
-  <%= f.submit '検索' %>
-<% end %>
+<section class="hero is-large" style="background-image: url('https://rails-02-sample.herokuapp.com/assets/home/cover-lg.jpg')">
+  <div class="hero-body">
+    <div class="container has-text-centerd">
+      <h1 class="title">
+        tm travelで<br>
+        まだ体験したことのない<br>
+        旅をしよう
+      </h1>
+    </div>
+  </div>
+  <%= form_with url: search_rooms_path, method: :get do |f| %>
+    <div class="columns is-centered">
+      <div class="column is-7">
+        <%= f.text_field :keyword, class: "input is-dark", placeholder: "エリア名、施設名など" %>
+        <%= f.submit"探す", class: "button is-warning .is-centered" %>
+      </div>
+    </div>
+  <% end %>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">
+      おすすめのエリア
+    </h1>
+	</div>
+
+<table class="table is-fullwidth">
+	<thead>
+		<tr>
+			<th>東京</th>
+			<th>大阪</th>
+			<th>京都</th>
+			<th>札幌</th>
+		</tr>
+	</thead>
+	<tbody>
+		<td>
+      <%= link_to (search_rooms_path(adress: "%東京%", method: :get)) do %><br>
+        <%= image_tag 'img_tokyo.jpeg', size:'250x350' %>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to (search_rooms_path(adress: "%大阪%", method: :get)) do %><br>
+        <%= image_tag 'img_osaka.jpeg', size:'250x350' %>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to (search_rooms_path(adress: "%京都%", method: :get)) do %><br>
+        <%= image_tag 'img_kyoto.jpeg', size:'250x350' %>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to (search_rooms_path(adress: "%札幌%", method: :get)) do %><br>
+        <%= image_tag 'img_sapporo.jpeg', size:'250x350' %>
+      <% end %>
+    </td>
+  </tbody>
 

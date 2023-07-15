@@ -1,8 +1,12 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user!
   def index
-    @reservations = Reservation.where(user_id: current_user.id)
     @user = current_user
-    #@reservations = Reservation.all.includes(:room)
+    if @user = current_user
+      @reservations = Reservation.where(user_id: current_user.id)
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def new
@@ -13,8 +17,10 @@ class ReservationsController < ApplicationController
 
   def confirm
     @reservation = Reservation.new(reservation_params)
-    @room = Room.find(params[:room_id])
+    @room = Room.find(params[:reservation][:room_id])
     @user = current_user
+    @days = (@reservation.check_out - @reservation.check_in).to_i
+    @price = @days * @room.price * @reservation.people_number
   end
 
   def create
@@ -23,8 +29,10 @@ class ReservationsController < ApplicationController
     @reservation.user_id = current_user.id
     if @reservation.save
       flash[:notice] = "予約が完了しました"
-    end
       redirect_to reservations_path
+    else
+      render "confirm"
+    end
   end
 
   private

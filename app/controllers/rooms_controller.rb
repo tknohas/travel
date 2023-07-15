@@ -1,7 +1,11 @@
 class RoomsController < ApplicationController
+  before_action :authenticate_user!, except: [:show, :search]
   def index
     @rooms = Room.all
     @user = current_user
+    if @user =! current_user
+      redirect_to new_user_session_path
+    end
   end
 
   def new
@@ -13,8 +17,10 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     if @room.save
       flash[:notice] = "登録が完了しました"
+      redirect_to room_path(@room)
+    else
+      render "new"
     end
-    redirect_to room_path(@room)
   end
 
   def show
@@ -24,8 +30,11 @@ class RoomsController < ApplicationController
   end
 
   def edit
-    @room = Room.find(params[:id])
-    @user = current_user
+    if @user != current_user
+      redirect_to new_user_session_path
+    end
+      @room = Room.find(params[:id])
+      @user = current_user
   end
 
   def update
@@ -35,10 +44,12 @@ class RoomsController < ApplicationController
   end
 
   def search
-        @search = Room.ransack(params[:q])
-        @rooms = @search.result
-        @user = current_user
-      end
+    #@rooms = Room.where('title LIKE ? or adress LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
+    @rooms = Room.where('adress LIKE ?', "%#{params[:adress]}%").where('body LIKE ? OR title LIKE ?', "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+    @user = current_user
+    #@search = Room.ransack(params[:q])
+    #@results = @search.result
+  end
 
   private
   def room_params

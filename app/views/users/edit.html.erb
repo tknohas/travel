@@ -1,23 +1,30 @@
-<h3>ユーザー編集</h3>
+<section class="section">
+  	<div class="container">
+      <h1 class="title">
+        ユーザー編集
+      </h1>
+	</div>
+</section>
 
 <%= form_with model: @user do |f| %>
-	<table>
+	<table class="table">
 		<tr>
-      <th><%= f.label :profile_image ,"アイコン画像" %></th>
-      <td><%= f.file_field :profile_image %></td>
-    </tr>
+      		<th><%= f.label :profile_image ,"アイコン画像" %></th>
+      		<td><%= f.file_field :profile_image, class:"input" %></td>
+    	</tr>
 		<tr>
 			<th><%= f.label :username ,"名前" %></th>
-			<td><%= f.text_field :username %></td>
+			<td><%= f.text_field :username, class:"input" %></td>
 		</tr>
 		<tr>
 			<th><%= f.label :self_introduction ,"自己紹介" %></th>
-			<td><%= f.text_area :self_introduction %></td>
+			<td><%= f.text_area :self_introduction, class:"textarea" %></td>
+		</tr>
 	</table>
 	<div>
     <ul>
-      <li><%= f.submit "編集を完了する" %></li>
-      <li><%= link_to "キャンセル", user_path %></li>
+      <li><%= f.submit "編集を完了する", class:"button is-success is-small" %></li>
+      <li><%= link_to "キャンセル", user_path, class:"button is-warning is-small" %></li>
     </ul>
   </div>
 <% end %>

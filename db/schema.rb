@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_01_162614) do
+ActiveRecord::Schema.define(version: 2023_07_10_152629) do
+
+  create_table "homes", force: :cascade do |t|
+    t.string "area_image_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "reservations", force: :cascade do |t|
     t.date "check_in"

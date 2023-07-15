@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   def index
     if user_signed_in?
       @users = User.where(username_id: current_user.id).order('created_at DESC')
