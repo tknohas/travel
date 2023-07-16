@@ -6,7 +6,7 @@
 	</div>
 </section>
 
-<%= render "shared/error", obj: @reservation, class:"is-danger" %>
+<%= render "shared/error", obj: @reservation %>
 
   <table class="table is-fullwidth">
     <thead>
@@ -20,8 +20,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= @reservation.check_in %></td>
-        <td><%= @reservation.check_out %></td>
+        <td><%= @reservation.check_in.strftime("%Y/%m/%d") %></td>
+        <td><%= @reservation.check_out.strftime("%Y/%m/%d") %></td>
         <td><%= @reservation.people_number %></td>
         <td><%= @days %></td>
         <td><%= @price %></td>

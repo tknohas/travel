@@ -31,8 +31,8 @@
 					<td><%= link_to reservation.room.title, room_path(room)  %></td>
 					<td><%= reservation.room.body %></td>
 					<td><%= reservation.payment %>円</td>
-					<td><%= reservation.check_in %></td>
-					<td><%= reservation.check_out %></td>
+					<td><%= reservation.check_in.strftime("%Y/%m/%d") %></td>
+					<td><%= reservation.check_out.strftime("%Y/%m/%d") %></td>
 					<td><%= reservation.created_at.to_s(:datetime_jp) %></td>
 				</tr>
 		<% end %>

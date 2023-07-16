@@ -30,9 +30,6 @@ class RoomsController < ApplicationController
   end
 
   def edit
-    if @user != current_user
-      redirect_to new_user_session_path
-    end
       @room = Room.find(params[:id])
       @user = current_user
   end
