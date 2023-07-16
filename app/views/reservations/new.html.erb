@@ -1,0 +1,22 @@
+<h3>ルーム予約画面</h3>
+
+<% if flash[:notice]%>
+  <p class="notice-ok"><%= flash[:notice]%></p>
+<%end%>
+<div>
+  <div class='room-name'>
+    <%= @room.title %>
+  </div>
+</div>
+<%= form_with model:@reservation do |f| %>
+  <h3>¥<%=@room.price%>/ 日</h3>
+  <h4>チェックイン</h4>
+    <%= f.date_field :check_in, value: :check_in %>
+  <h4>チェックアウト</h4>
+    <%= f.date_field :check_out, value: :check_out %>
+  <h4>人数</h4>
+    <%=f.number_field :people_number, value: :people_number%>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :room_id, value: @room.id %>
+  <%= f.submit "登録"%>
+<%end%>

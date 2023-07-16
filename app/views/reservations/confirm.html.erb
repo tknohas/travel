@@ -1,0 +1,43 @@
+<section class="section">
+  	<div class="container">
+      <h1 class="title">
+        予約確認画面
+      </h1>
+	</div>
+</section>
+
+<%= render "shared/error", obj: @reservation %>
+
+  <table class="table is-fullwidth">
+    <thead>
+      <tr>
+        <th>チェックイン</th>
+        <th>チェックアウト</th>
+        <th>人数</th>
+        <th>宿泊日数</th>
+        <th>合計料金</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @reservation.check_in.strftime("%Y/%m/%d") %></td>
+        <td><%= @reservation.check_out.strftime("%Y/%m/%d") %></td>
+        <td><%= @reservation.people_number %></td>
+        <td><%= @days %></td>
+        <td><%= @price %></td>
+      </tr>
+    </tbody>
+  </table>
+<%= form_with model: @reservation do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <%= f.hidden_field :check_in %>
+    <%= f.hidden_field :check_out %>
+    <%= f.hidden_field :people_number %>
+    <%= f.hidden_field :days, value:@days %>
+    <%= f.hidden_field :payment, value:@price %>
+    
+    <%= f.submit "予約する" %>
+<% end %>
+
+<%= link_to "戻る", room_path(@room) %>

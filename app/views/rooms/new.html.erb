@@ -1,21 +1,48 @@
-<h3>新規登録</h3>
+<section class="section">
+	<div class="container">
+		<h1 class="title">
+			新規登録
+		</h1>
+	</div>
+</section>
  
+<%= render "shared/error", obj: @room %>
+
 <%= form_with model: @room do |f| %>
-	<%= f.label :title, "施設名" %>
-	<%= f.text_field :title %>
-
-	<%= f.label :body, "施設詳細" %>
-	<%= f.text_area :body %>
-
-	<%= f.label :price, "料金" %>
-	<%= f.text_field :price %>
-
-	<%= f.label :adress, "住所" %>
-	<%= f.text_field :adress %>
-
-	<%= f.label :room_image, "施設画像" %>
-	<%= f.file_field :room_image %>
-	
-
-	<%= f.submit "保存" %>
+	<div class="field">
+		<tr>
+			<th><%= f.label :title, "施設名", class:"label" %></th>
+			<td><%= f.text_field :title, class:"input form-control",placeholder: "ルーム名を入力" %></td>
+		</tr>
+	</div>
+	<div class="field">
+		<tr>
+			<th><%= f.label :body, "施設詳細", class:"label" %></th>
+			<td><%= f.text_area :body, class: "textarea", placeholder: "施設詳細を入力" %></td>
+		</tr>
+	</div>
+	<div class="field">
+		<tr>
+			<th><%= f.label :price, "料金", class:"label" %></th>
+			<td><%= f.text_field :price, class:"input", placeholder: "1日あたりの料金を入力" %></td>
+		</tr>
+	</div>
+	<div class="field">
+		<tr>
+			<th><%= f.label :adress, "住所", class:"label" %></th>
+			<td><%= f.text_field :adress, class:"input", placeholder: "住所を入力" %></td>
+		</tr>
+	</div>
+	<div class="field">
+		<tr>
+			<th><%= f.label :room_image, "施設画像", class:"label" %></th>
+			<tr><%= f.file_field :room_image, class:"input" %></tr>
+		</tr>
+	</div>
+	<div class="field">
+		<tr>
+			<th><%= f.hidden_field :user_id, value: current_user.id %></th>
+			<td><%= f.submit "保存", class: "button is-link" %></td>
+		</tr>
+	</div>
 <% end %>

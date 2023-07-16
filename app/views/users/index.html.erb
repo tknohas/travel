@@ -1,6 +1,12 @@
-<h3>アカウント</h3>
+<section class="section">
+  	<div class="container">
+      <h1 class="title">
+        アカウント
+      </h1>
+	</div>
+</section>
 
-<table>
+<table class="table is-fullwidth">
   <thead> 
     <th>メールアドレス</th>
     <th>パスワード</th>
@@ -13,5 +19,5 @@
   </tbody>
 </table>
 
-<%= link_to "プロフィール", users_show_path %>
-<%= link_to "編集", edit_user_registration_path %>
+<%= link_to "プロフィール", user_path(@users), class: "button is-light is-small" %>
+<%= link_to "編集", edit_user_registration_path, class: "button is-light is-small" %>

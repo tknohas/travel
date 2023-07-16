@@ -5,5 +5,12 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   resources :users
-  resources :rooms
+  resources :rooms do
+    resources :reservations
+    collection do
+      get 'search'
+    end
+  end
+  resources :reservations
+  post 'reservations/confirm'
 end

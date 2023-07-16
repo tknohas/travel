@@ -76,6 +76,8 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    bulma-rails (0.9.4)
+      sassc (~> 2.0)
     byebug (11.1.3)
     capybara (3.39.1)
       addressable
@@ -86,6 +88,14 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    carrierwave (3.0.0)
+      activemodel (>= 6.0.0)
+      activesupport (>= 6.0.0)
+      addressable (~> 2.6)
+      image_processing (~> 1.1)
+      marcel (~> 1.0.0)
+      ssrf_filter (~> 1.0)
+    coderay (1.1.3)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
     date (3.3.3)
@@ -106,6 +116,9 @@ GEM
       domain_name (~> 0.5)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    image_processing (1.12.2)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -146,6 +159,11 @@ GEM
     nokogiri (1.15.2-x86_64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pry (0.14.2)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -180,6 +198,9 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
+    rails-i18n (7.0.7)
+      i18n (>= 0.7, < 2)
+      railties (>= 6.0.0, < 8)
     railties (6.1.7.3)
       actionpack (= 6.1.7.3)
       activesupport (= 6.1.7.3)
@@ -187,6 +208,10 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
     rake (13.0.6)
+    ransack (4.0.0)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -203,6 +228,8 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.5)
+    ruby-vips (2.1.4)
+      ffi (~> 1.12)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
@@ -234,6 +261,7 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.6.3-x86_64-darwin)
+    ssrf_filter (1.1.1)
     thor (1.2.2)
     tilt (2.2.0)
     timeout (0.3.2)
@@ -274,14 +302,20 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.4)
+  bulma-rails
   byebug
   capybara (>= 3.26)
+  carrierwave
   devise
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  mini_magick
+  pry-rails
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.7, >= 6.1.7.3)
+  rails-i18n
+  ransack
   refile!
   refile-mini_magick
   sass-rails (>= 6)

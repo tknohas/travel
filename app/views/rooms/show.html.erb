@@ -1,9 +1,44 @@
-<%= @room.title %>
+<%= link_to "戻る", :back, class:"button is-ghost is-medium" %>
 
-<%= safe_join(@room.body.split("\n"),tag(:br)) %>
-
-<%= @room.price %>
-
-<%= @room.adress %>
-
-<%= attachment_image_tag @room, :room_image %>
+<div class="card is-centered pb-2">
+	<header class="card-header">
+	<%= attachment_image_tag @room, :room_image, fallback: "default.room.png", :size => '400x320' %>
+		<span class="card-header-title is-size-5">
+			施設名：<%= @room.title %><br>
+			料金：<%= @room.price %>円~
+		</span>
+		<span class="card-header-title is-size-6 has-text-dark">
+			住所：<%= @room.adress %>
+		</span>
+		
+	</header>
+	<div class="card-content">
+    <div class="content">
+			施設詳細：<%= safe_join(@room.body.split("\n"),tag(:br)) %>
+    </div>
+  </div>
+	<footer class="card-footer">
+		<% if user_signed_in? %>
+			<%= render "shared/error", obj: @reservation %>
+				<%= form_with model: @reservation, url:reservations_confirm_path do |f| %>
+					<%= f.hidden_field :room_id, value: @room.id %>
+				
+					<%= f.label :check_in, "チェックイン", class:"has-text-weight-semibold" %>
+					<%= f.date_field :check_in, class:"input" %>
+			
+					<%= f.label :check_out, "チェックアウト", class:"has-text-weight-semibold" %>
+					<%= f.date_field :check_out, class:"input" %>
+			
+					<%= f.label :people_number, "人数", class:"has-text-weight-semibold" %>
+					<%= f.text_field :people_number, class:"input"  %>
+					<br>
+					<%= f.submit "予約確認画面へ", class:"button is-warning mt-2" %>
+				<% end %>
+				<% if @room.user_id == current_user.id %>
+					<%= link_to "編集", edit_room_path %>
+				<% end %>
+		<% else %>
+				<%= link_to "ログイン", new_user_session_path %>
+		<% end %>
+  </footer>
+</div>

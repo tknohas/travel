@@ -11,8 +11,54 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if flash[:notice] %>
+      <div class="notification is-info">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="notification is-danger">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+
+    <nav class="navbar is-warning">
+      <div class="navbar-brand">
+        <%= link_to root_path, class: "navbar-item" do %>
+          <h1 class="title is-4" style="font-family: cursive;">tm travel</h1>
+        <% end %>
+      </div>
+      <% if user_signed_in? %>
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                <%= current_user.username %>
+              </a>
+            
+              <div class="navbar-dropdown">
+                <%= link_to '施設の新規登録', new_room_path, class: "navbar-item" %>
+                <%= link_to '予約済み一覧', reservations_path, class: "navbar-item" %>
+                <%= link_to '登録済み一覧', rooms_path, class: "navbar-item" %>
+                <%= link_to 'アカウント設定', users_path, class: "navbar-item"  %>
+                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "navbar-item"  %>
+              </div>
+            </div>
+            <div class="navbar-item">
+              <%= attachment_image_tag @user, :profile_image, fallback:"default.icon.png", :size => '70x100' %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="navbar-end">
+          <div class="navbar-item">
+          <%= link_to '新規登録', new_user_registration_path, class:"button is-warning is-light mr-1"  %>
+          <%= link_to 'ログイン', new_user_session_path, class:"button is-warning is-light"  %>
+          </div>
+        </div>
+      <% end %>
+    </nav>
     <%= yield %>
   </body>
 </html>
